@@ -11,6 +11,7 @@
 	<form action = "${linkServeletNovaEmpresa }" method="post">
 		Nome da Empresa: <input type="text" name="nome"/>
 		CEO: <input type="text" name="ceo"/>
+		Data Abertura: <input type="text" name="data"/>
 		<input type="submit"/>
 		
 	</form>
