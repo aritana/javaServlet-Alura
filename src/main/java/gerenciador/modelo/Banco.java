@@ -1,9 +1,7 @@
-package gerenciador.servlet;
+package gerenciador.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Banco {
 

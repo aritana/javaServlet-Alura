@@ -4,30 +4,6 @@
   <welcome-file-list>
     <welcome-file>bem-vindo.html</welcome-file>
   </welcome-file-list>
-  
-  <servlet>
-  	
-  	<servlet-name>
-  		listaEmpresasServlet
-  	</servlet-name>
-  
-   <servlet-class>
-   		gerenciador.servlet.ListaEmpresasServelet
-   </servlet-class>
-   
-  </servlet>
-  
-  <servlet-mapping>
-  
-    <servlet-name>
-  		listaEmpresasServlet
-  	</servlet-name>
-  
-  	<url-pattern>
-  		/listaEmpresas
-  	</url-pattern>
-  
-  </servlet-mapping>
-  
+ 
   
 </web-app>
