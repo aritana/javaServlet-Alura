@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import gerenciador.acao.AlterarEmpresa;
 import gerenciador.acao.ListarEmpresas;
+import gerenciador.acao.MostrarEmpresas;
+import gerenciador.acao.NovaEmpresa;
+import gerenciador.acao.RemoverEmpresas;
 
 @WebServlet("/entrada")
 public class UnicaEntradaServelet extends HttpServlet {
@@ -20,19 +24,40 @@ public class UnicaEntradaServelet extends HttpServlet {
 
 		switch (paramAcao) {
 		case "listarEmpresas":
-			
+
 			System.out.println("Listando empresas");
-			ListarEmpresas acao = new ListarEmpresas();
-			acao.executa(request, response);
-			break;
-			
-		case "removerEmpresa":
-			System.out.println("Remover empresa");
-			break;
-		case "mostrarEmpresa":
-			System.out.println("Mostrar empresa");
+			ListarEmpresas listarEmpresas = new ListarEmpresas();
+			listarEmpresas.executa(request, response);
 			break;
 
+		case "removerEmpresa":
+
+			System.out.println("Remover empresa");
+			RemoverEmpresas removerEmpresas = new RemoverEmpresas();
+			removerEmpresas.executa(request, response);
+			break;
+		
+		case "mostrarEmpresa":
+
+			System.out.println("Mostrar empresa");
+			MostrarEmpresas mostrarEmpresas = new MostrarEmpresas();
+			mostrarEmpresas.executa(request, response);
+			break;
+			
+		case "alterarEmpresa":
+
+			System.out.println("Alterar empresa");
+			AlterarEmpresa alterarEmpresa = new AlterarEmpresa();
+			alterarEmpresa.executa(request, response);
+			break;
+			
+		case "novaEmpresa":
+			System.out.println("Cadastrando nova empresa");
+			NovaEmpresa novaEmpresa = new NovaEmpresa();
+			novaEmpresa.executa(request, response);
+			break;
+			
+			
 		}
 
 	}

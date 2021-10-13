@@ -1,27 +1,25 @@
 package gerenciador.acao;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gerenciador.modelo.Banco;
-import gerenciador.modelo.Empresa;
 
-public class ListarEmpresas {
+public class RemoverEmpresas {
 
 	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("Remover empresa");
+		String paramId = request.getParameter("id");
+		Integer id = Integer.valueOf(paramId);
+		System.out.println(id);
+
 		Banco banco = new Banco();
-		List<Empresa> lista = banco.getEmpresas();
+		banco.removeEmpresa(id);
+		response.sendRedirect("entrada?acao=listarEmpresas");
 
-		String destiny = "/listaEmpresas.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(destiny);
-		request.setAttribute("listaEmpresas", lista);
-		rd.forward(request, response);
 	}
-
 }
