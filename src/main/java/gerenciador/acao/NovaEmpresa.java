@@ -34,6 +34,7 @@ public class NovaEmpresa {
 		empresa.setDataAbertura(dataAbertura);
 		Banco banco = new Banco();
 		banco.adiciona(empresa);	
+		request.setAttribute("empresa",empresa.getNome());
 		response.sendRedirect("entrada?acao=listarEmpresas");
 		
 	}
