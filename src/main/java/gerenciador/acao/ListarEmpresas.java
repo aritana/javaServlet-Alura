@@ -18,6 +18,7 @@ public class ListarEmpresas implements Acao {
 
 		Banco banco = new Banco();
 		List<Empresa> lista = banco.getEmpresas();
+		lista.sort((e1, e2) -> { return e1.getNome().compareTo(e2.getNome()); });
 		request.setAttribute("listaEmpresas", lista);
 		return "forward:listaEmpresas.jsp";
 	}
