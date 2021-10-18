@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import gerenciador.modelo.Banco;
 import gerenciador.modelo.Empresa;
 
-public class NovaEmpresa {
+public class NovaEmpresa implements Acao {
 
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		String nomeEmpresa =  request.getParameter("nome");		
-		String ceo =  request.getParameter("ceo");
+	public String executa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String nomeEmpresa = request.getParameter("nome");
+		String ceo = request.getParameter("ceo");
 		String data = request.getParameter("data");
 		Date dataAbertura = null;
 		try {
@@ -26,17 +27,16 @@ public class NovaEmpresa {
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-		
+
 		Empresa empresa = new Empresa();
-				
+
 		empresa.setNome(nomeEmpresa);
 		empresa.setCeo(ceo);
 		empresa.setDataAbertura(dataAbertura);
 		Banco banco = new Banco();
-		banco.adiciona(empresa);	
-		request.setAttribute("empresa",empresa.getNome());
-		response.sendRedirect("entrada?acao=listarEmpresas");
-		
+		banco.adiciona(empresa);
+		request.setAttribute("empresa", empresa.getNome());
+		return "redirect:entrada?acao=ListarEmpresas";
 	}
 
 }

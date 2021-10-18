@@ -1,16 +1,20 @@
 package gerenciador.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import gerenciador.acao.Acao;
 import gerenciador.acao.AlterarEmpresa;
 import gerenciador.acao.ListarEmpresas;
 import gerenciador.acao.MostrarEmpresas;
 import gerenciador.acao.NovaEmpresa;
+import gerenciador.acao.NovaEmpresaForm;
 import gerenciador.acao.RemoverEmpresas;
 
 @WebServlet("/entrada")
@@ -21,43 +25,27 @@ public class UnicaEntradaServelet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String paramAcao = request.getParameter("acao");
+		String nome = null;
 
-		switch (paramAcao) {
-		case "listarEmpresas":
+		String nomeDaClasse = "gerenciador.acao." + paramAcao;
 
-			System.out.println("Listando empresas");
-			ListarEmpresas listarEmpresas = new ListarEmpresas();
-			listarEmpresas.executa(request, response);
-			break;
+		try {
+			Class classe = Class.forName(nomeDaClasse);
+			Acao acao = (Acao) classe.newInstance();
+			nome = acao.executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ServletException
+				| IOException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException();
+		}
 
-		case "removerEmpresa":
-
-			System.out.println("Remover empresa");
-			RemoverEmpresas removerEmpresas = new RemoverEmpresas();
-			removerEmpresas.executa(request, response);
-			break;
-		
-		case "mostrarEmpresa":
-
-			System.out.println("Mostrar empresa");
-			MostrarEmpresas mostrarEmpresas = new MostrarEmpresas();
-			mostrarEmpresas.executa(request, response);
-			break;
-			
-		case "alterarEmpresa":
-
-			System.out.println("Alterar empresa");
-			AlterarEmpresa alterarEmpresa = new AlterarEmpresa();
-			alterarEmpresa.executa(request, response);
-			break;
-			
-		case "novaEmpresa":
-			System.out.println("Cadastrando nova empresa");
-			NovaEmpresa novaEmpresa = new NovaEmpresa();
-			novaEmpresa.executa(request, response);
-			break;
-			
-			
+	
+		String[] tipoEndereco = nome.split(":");
+		if (tipoEndereco[0].equals("forward")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEndereco[1]);
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect(tipoEndereco[1]);
 		}
 
 	}

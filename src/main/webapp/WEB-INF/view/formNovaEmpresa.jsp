@@ -12,7 +12,7 @@
 		Nome da Empresa: <input type="text" name="nome"/>
 		CEO: <input type="text" name="ceo"/>
 		Data Abertura: <input type="text" name="data"/>
-		<input type="hidden" name="acao" value="novaEmpresa" />
+		<input type="hidden" name="acao" value="NovaEmpresa" />
 		<input type="submit"/>
 		
 	</form>
