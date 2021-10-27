@@ -8,14 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import gerenciador.acao.Acao;
-import gerenciador.acao.AlterarEmpresa;
-import gerenciador.acao.ListarEmpresas;
-import gerenciador.acao.MostrarEmpresas;
-import gerenciador.acao.NovaEmpresa;
-import gerenciador.acao.NovaEmpresaForm;
-import gerenciador.acao.RemoverEmpresas;
 
 @WebServlet("/entrada")
 public class UnicaEntradaServelet extends HttpServlet {
@@ -24,11 +19,22 @@ public class UnicaEntradaServelet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		String paramAcao = request.getParameter("acao");
+		
+		HttpSession session = request.getSession();
+		boolean usuarioNaoEstaLogado = (session.getAttribute("usuarioLogado")==null); 
+		boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login")|| paramAcao.equals("LoginForm"));
+			
+		if(ehUmaAcaoProtegida && usuarioNaoEstaLogado) {
+			response.sendRedirect( "entrada?acao=LoginForm");
+			return;
+		}
+		
+
 		String nome = null;
-
 		String nomeDaClasse = "gerenciador.acao." + paramAcao;
-
+		
 		try {
 			Class classe = Class.forName(nomeDaClasse);
 			Acao acao = (Acao) classe.newInstance();

@@ -20,6 +20,9 @@
 <title>Lista de empresas</title>
 </head>
 <body>
+
+	Usuário Logado: ${usuarioLogado.login}
+	<c:import url="logout-partial.jsp"></c:import>
 	<ul>
 		<c:forEach items="${listaEmpresas}" var="empresa" >
 			
