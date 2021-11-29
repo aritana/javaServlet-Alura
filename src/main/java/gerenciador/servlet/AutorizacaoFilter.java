@@ -17,9 +17,17 @@ import javax.servlet.http.HttpSession;
  */
 //@WebFilter("/entrada")
 public class AutorizacaoFilter implements Filter {
+	
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {//jetty exige
+	}
+	
+	@Override
+	public void destroy() {//jetty exige
+	}
 
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
-			throws IOException, ServletException {
+			throws IOException, ServletException {		
 
 		System.out.println("Autorizacao Filter");
 		HttpServletRequest request = (HttpServletRequest) servletRequest;

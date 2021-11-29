@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -18,6 +19,13 @@ import gerenciador.acao.Acao;
  */
 //@WebFilter("/entrada")
 public class ControladorFilter implements Filter {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {//jetty exige
+	}
+	
+	@Override
+	public void destroy() {//jetty exige
+	}
 
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
 			throws IOException, ServletException {
